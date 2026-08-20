@@ -1,0 +1,11 @@
+// Подключаем в нужном порядке каскада.
+// Утилиты (utils) сами по себе CSS не генерируют —
+// каждый файл подключает их через @use '../utils' as *;
+
+@use "base/reset";
+@use "base/base";
+@use "base/icons";
+@use "base/a11y";
+@use "blocks/header";
+@use "blocks/hero";
+@use "blocks/footer";

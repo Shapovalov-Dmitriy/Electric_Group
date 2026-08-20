@@ -1,0 +1,15 @@
+@use "sass:math";
+
+/// px → rem. База 16px (дефолт браузера), поэтому зум и настройки пользователя работают.
+/// rem(24) → 1.5rem;  rem(24px) → 1.5rem;  rem(2rem) → 2rem (не трогает)
+@function rem($px, $base: 16) {
+  @if math.is-unitless($px) {
+    @return math.div($px, $base) * 1rem;
+  }
+
+  @if math.unit($px) == "px" {
+    @return math.div(math.div($px, 1px), $base) * 1rem;
+  }
+
+  @return $px;
+}

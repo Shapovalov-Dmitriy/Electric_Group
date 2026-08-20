@@ -1,0 +1,56 @@
+@use "variables" as *;
+
+// ===== Медиазапросы (mobile-first) =====
+// Пишешь прямо в блоке — при сборке они сгруппируются автоматически
+
+@mixin tablet {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: $bp-laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+// Произвольная ширина: @include media(480px) { ... }
+@mixin media($min) {
+  @media (min-width: $min) {
+    @content;
+  }
+}
+
+// ===== Контейнер =====
+@mixin container {
+  width: 100%;
+  max-width: $container-width;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+}
+
+// Скрыть визуально, но оставить для скринридеров
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

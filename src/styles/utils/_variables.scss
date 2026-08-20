@@ -1,0 +1,29 @@
+// Числа без единиц = пиксели из макета, функция rem() переведет их в rem
+
+// ===== Брейкпоинты (mobile-first) =====
+$bp-tablet: 768px;
+$bp-laptop: 1024px;
+$bp-desktop: 1280px;
+
+// ===== Сетка =====
+$container-width: 1200px;
+$container-padding: 16px;
+
+// ===== Цвета =====
+$color-text-alternate: #ffffff;
+$color-bg: #ffffff;
+$color-text: #1f2430;
+$color-muted: #6b7280;
+$color-accent: #3f6fff;
+$color-border: #e6e8ee;
+
+// ===== Типографика =====
+$font-family-base:
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  sans-serif;
+$font-size-base: 16;
+$line-height-base: 1.5;

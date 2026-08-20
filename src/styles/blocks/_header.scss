@@ -1,0 +1,198 @@
+@use "../utils" as *;
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(230, 232, 238, 0.6);
+
+  @supports not (
+    (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))
+  ) {
+    .header {
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+  }
+  padding: rem(6) 0;
+  @include tablet {
+    padding: rem(10) 0;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem(16);
+    min-height: rem(64);
+  }
+
+  &__logo img {
+    width: rem(50);
+    height: rem(50);
+    @include tablet {
+      width: rem(70);
+      height: rem(70);
+    }
+  }
+
+  &__contacts {
+    display: none;
+    @include tablet {
+      display: flex;
+      align-items: center;
+      gap: rem(10);
+      margin: 0 rem(20) 0 auto;
+      a {
+        transition: color 0.2s ease;
+        &:hover {
+          color: $color-accent;
+          text-decoration: underline;
+        }
+      }
+    }
+    .icon {
+      width: rem(18);
+      height: rem(18);
+      color: $color-accent;
+    }
+  }
+}
+
+// ===== Навигация: на мобильных — бургер, с планшета — в строку =====
+
+.nav__burger {
+  position: relative;
+  width: rem(44);
+  height: rem(44);
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.nav__burger-line,
+.nav__burger-line::before,
+.nav__burger-line::after {
+  position: absolute;
+  width: rem(22);
+  height: 2px;
+  background-color: currentColor;
+  transition:
+    transform 0.3s,
+    background-color 0.3s;
+}
+
+.nav__burger-line {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav__burger-line::before {
+  content: "";
+  top: rem(-7);
+  left: 0;
+}
+
+.nav__burger-line::after {
+  content: "";
+  top: rem(7);
+  left: 0;
+}
+
+// ===== Открытое состояние: крестик =====
+
+// Среднюю линию просто обесцвечиваем — transform трогать нельзя,
+// иначе вместе с ней схлопнутся и псевдоэлементы
+.nav--open .nav__burger-line {
+  background-color: transparent;
+}
+
+.nav--open .nav__burger-line::before {
+  transform: translateY(rem(7)) rotate(45deg);
+}
+
+.nav--open .nav__burger-line::after {
+  transform: translateY(rem(-7)) rotate(-45deg);
+}
+
+.nav__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  padding: rem(16);
+  background-color: rgba(255, 255, 255, 1);
+  border-bottom: 1px solid $color-border;
+  max-height: calc(100vh - #{rem(64)}); // высота экрана минус шапка
+  max-height: calc(100dvh - #{rem(64)});
+  overflow-y: auto;
+  @include tablet {
+    background-color: transparent;
+  }
+}
+
+.nav--open .nav__list {
+  display: flex;
+}
+
+.nav__link {
+  position: relative;
+  display: block;
+  padding: rem(10) rem(8);
+  transition: color 0.2s;
+  font-weight: 600;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+@include tablet {
+  .nav__list {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: rem(20);
+    padding: 0;
+    border: 0;
+  }
+
+  .nav__link {
+    padding: rem(8) 0;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 3px;
+      background-color: $color-accent;
+      width: 0%;
+      border-radius: rem(2);
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      &:before {
+        width: 100%;
+        left: 0;
+        right: unset;
+      }
+    }
+  }
+}

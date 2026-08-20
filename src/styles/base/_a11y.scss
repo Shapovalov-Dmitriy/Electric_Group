@@ -1,0 +1,45 @@
+@use "../utils" as *;
+
+// ============================================================
+// База доступности: skip-link, видимый фокус, prefers-reduced-motion
+// ============================================================
+
+.skip-link {
+  position: fixed;
+  top: rem(8);
+  left: rem(8);
+  z-index: 1000;
+  padding: rem(8) rem(16);
+  background-color: $color-bg;
+  color: $color-text;
+  border: 1px solid $color-border;
+  border-radius: rem(4);
+  transform: translateY(-300%);
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid $color-accent;
+  outline-offset: 2px;
+}
+
+// Отключаем плавные эффекты для тех, кто попросил
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  // Анимации превращаем в «мгновенные» вместо полного удаления:
+  // эффект (смена цвета, появление блока) остаётся, но без движения
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

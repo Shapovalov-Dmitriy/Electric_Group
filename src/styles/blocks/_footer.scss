@@ -1,0 +1,48 @@
+@use "../utils" as *;
+
+.footer {
+  padding-block: rem(24);
+  background-color: $color-text;
+  color: #fff;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+
+  @include laptop {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: rem(24);
+  }
+}
+
+.footer__contact {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+  font-size: rem(14);
+
+  .icon {
+    width: rem(18);
+    height: rem(18);
+    color: $color-accent;
+  }
+}
+
+.footer__copy {
+  font-size: rem(14);
+}

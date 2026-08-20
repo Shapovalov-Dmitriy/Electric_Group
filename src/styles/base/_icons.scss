@@ -1,0 +1,9 @@
+@use "../utils" as *;
+
+// Иконки из спрайта public/sprite.svg
+// Цвет наследуется через currentColor — управляется свойством color родителя
+.icon {
+  width: rem(24);
+  height: rem(24);
+  flex-shrink: 0;
+}

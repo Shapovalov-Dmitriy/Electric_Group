@@ -1,0 +1,31 @@
+@use "../utils" as *;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: rem(72);
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: rem($font-size-base);
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-bg;
+}
+
+// Скелет страницы: шапка и футер по краям, main растягивается.
+// Благодаря этому футер всегда прижат к низу, даже на коротких страницах.
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr auto; // header / main / footer
+  min-height: 100vh;
+  min-height: 100dvh; // корректная высота на мобильных
+}
+
+.container {
+  @include container;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
